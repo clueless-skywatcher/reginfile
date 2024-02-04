@@ -2,17 +2,32 @@ package com.github.cluelessskywatcher.reginfile;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.InputStream;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.imageio.ImageIO;
 
 public class ImageLoadUtils {
     public static final ImageIcon REFRESH_ICON = loadImage("refresh.png");
     public static final ImageIcon UPONELEVEL_ICON = loadImage("uponelevel.png");
 
     public static ImageIcon loadImage(String fileName) {
-        String fullFile = ImageLoadUtils.class.getClassLoader().getResource(fileName).getFile();
-        return new ImageIcon(fullFile);
+        InputStream stream = ImageLoadUtils.class.getClassLoader().getResourceAsStream(fileName);
+        try
+        {
+            if (stream == null)
+            {
+                throw new Exception("Cannot find file " + fileName);
+            }
+            return new ImageIcon(ImageIO.read(stream));
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+
+        return null;
     }
 
     public static boolean compareIcons(Icon i1, Icon i2) {

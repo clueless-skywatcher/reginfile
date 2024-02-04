@@ -2,17 +2,15 @@ package com.github.cluelessskywatcher.reginfile;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.InputStream;
 import java.io.IOException;
 import java.util.List;
 
-import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -148,8 +146,8 @@ public class ReginFrame extends JFrame {
 
     public static List<BufferedImage> getImageIcons(String iconName) throws IOException {
         ClassLoader classLoader = ReginFrame.class.getClassLoader();
-        File filePath = new File(classLoader.getResource(iconName).getFile());
-        List<BufferedImage> images = ICODecoder.read(filePath);
+        InputStream iStream = classLoader.getResourceAsStream(iconName);
+        List<BufferedImage> images = ICODecoder.read(iStream);
         return images;
     }
 

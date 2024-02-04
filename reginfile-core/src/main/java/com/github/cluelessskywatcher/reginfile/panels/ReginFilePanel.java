@@ -46,10 +46,6 @@ public class ReginFilePanel extends JPanel {
 
         String fileName = FileSystemView.getFileSystemView().getSystemDisplayName(file);
 
-        if (file.getName().equals("war3roc.exe")) {
-            System.out.println();
-        }
-        
         ImageIcon icon;
         if (file.getName().toLowerCase().endsWith(".ico")) {
             icon = new ImageIcon(getIconImage(file));
